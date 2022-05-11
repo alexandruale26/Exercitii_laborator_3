@@ -35,11 +35,6 @@ namespace Ex2
             {
                 Console.Write(c);
             }
-
-            
-
-            
-
         }
     }
 }
