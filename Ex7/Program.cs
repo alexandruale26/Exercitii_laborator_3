@@ -24,15 +24,15 @@ namespace Ex7
                 if (numar1 < 1 || numar2 < 1) 
                     return "Ambele numere trebuie sa fie mai mari decat 0";
 
+                if (numar1 == numar2)
+                    return $"Cel mai mare divizor comun este {numar1}";
+
                 for (int i = celMaiMAre - 1; i > 1; i--)
                 {
                     if (numar1 % i == 0 && numar2 % i == 0) 
                         return $"Cel mai mare divizor cumun al numerelor {numar1} si {numar2} este  {i}";
                 }
-
-                if (numar1 == numar2)
-                    return $"Cel mai mare divizor comun este {numar1}";
-
+                
                 return "Cel mai mare divizor comun este 1";
             }
         }

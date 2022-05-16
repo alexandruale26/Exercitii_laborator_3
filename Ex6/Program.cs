@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ex6
+namespace Ex6_v2
 {
     class Program
     {
@@ -12,24 +12,16 @@ namespace Ex6
 
             Console.WriteLine("Introduceti numarul");
             int numar = int.Parse(Console.ReadLine());
-            int[] divizor = {2,3,5,7};
 
-            Console.WriteLine(Prim(numar, divizor));
+            Console.WriteLine(Prim(numar));
 
-            static string Prim(int numar, int[] divizor)
+            static string Prim(int numar)
             {
-                if (numar < 2) 
-                    return "Numarul introdus nu poate fi mai mic decat 2";
-
-                if (numar == 2) 
-                    return "Numarul 2 este prim";
-
-                for (int i = 0; i < divizor.Length; i++)
+                for (int i = 2; i * i <= numar; i++)
                 {
-                    if (numar % divizor[i] == 0) 
-                        return $"Numarul {numar} este divizibil cu {divizor[i]}";
+                    if (numar % i == 0)
+                        return $"Numarul {numar} este divizibil cu {i}";
                 }
-
                 return $"Numarul {numar} este prim";
             }
         }

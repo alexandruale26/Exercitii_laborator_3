@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ex10
+namespace Ex10_v1._2
 {
     class Program
     {
@@ -8,7 +8,7 @@ namespace Ex10
         {
             /*      Arpsod adoră două lucruri: matematica și clătitele bunicii sale. Într-o zi,
                 aceasta s-a apucat să prepare clătite. Arpsod mănâncă toate clătitele începând 
-                dela a N-a clătită preparată, până la a M-a clătită preparată inclusiv N ș i M).
+                de la a N-a clătită preparată, până la a M-a clătită preparată inclusiv N ș i M).
                 Pentru că el vrea să mănânce clătite cu diferite umpluturi și-a făcut următoarea
                 regulă. 
                     Dacă numărul de ordine al clătitei este prim atunci aceasta va fi cu ciocolată. 
@@ -33,6 +33,9 @@ namespace Ex10
             Console.WriteLine("Introduceti pe M");
             int m = int.Parse(Console.ReadLine());
 
+            int[] index = NumarDeOrdineClatite(n, m);
+            int ciocolata = 0, gem = 0, inghetata = 0, zahar = 0, simple = 0, total = 0;
+
 
             if (n < 1 || m < 1)
             {
@@ -46,14 +49,8 @@ namespace Ex10
             }
 
 
-            int[] index = NumarDeOrdineClatite(n, m);
+            Clatite();
 
-            int ciocolata = ClatiteCuCiocolata(index);
-            int gem = ClatiteCuGem(index);
-            int inghetata = ClatiteCuInghetata(index);
-            int zahar = ClatiteCuZahar(ciocolata, gem, inghetata, index);
-            int simple = ClatiteSimple(ciocolata, gem, inghetata, index);
-            int total = ciocolata + gem + inghetata + zahar + simple;
 
             Console.WriteLine("Ciocolata " + ciocolata);
             Console.WriteLine("Gem " + gem);
@@ -62,6 +59,7 @@ namespace Ex10
             Console.WriteLine("Simple " + simple);
             Console.WriteLine("Total clatite  --> " + total);
             
+
 
             static int[] NumarDeOrdineClatite(int n, int m)
             {
@@ -123,73 +121,24 @@ namespace Ex10
                     return false;
             }
 
-            static int ClatiteCuCiocolata(int[] index)
-            {
-                int ciocolata = 0;
 
+            void Clatite()
+            {
                 for (int i = 0; i < index.Length; i++)
                 {
                     if (Prim(index[i]))
-                         ciocolata++;
-                }
-                return ciocolata;
-            }
-
-            static int ClatiteCuGem(int[] index)
-            {
-                int gem = 0;
-
-                for (int i = 0; i < index.Length; i++)
-                {
-                    if (PatratPerfect(index[i]))
+                        ciocolata++;
+                    else if (PatratPerfect(index[i]) || CubPerfect(index[i]))
                         gem++;
-
-                    if (CubPerfect(index[i]))
-                        gem++;
-                }
-                return gem;
-            }
-
-            static int ClatiteCuInghetata(int[] index)
-            {
-                int inghetata = 0;
-
-                for (int i = 0; i < index.Length; i++)
-                {
-                    if (SumaDivizorilor(index[i]))
+                    else if (SumaDivizorilor(index[i]))
                         inghetata++;
+                    else if (index[i] % 2 == 0)
+                        zahar++;
+                    else
+                        simple++;
                 }
-                return inghetata;
-            }
 
-            static int ClatiteCuZahar(int ciocolata, int gem, int inghetata, int[] index)
-            {
-                int zahar = 0;
-
-                if (ciocolata == 0 && gem == 0 && inghetata == 0)
-                {
-                    for (int i = 0; i < index.Length; i++)
-                    {
-                        if (index[i] % 2 == 0)
-                            zahar++;
-                    }
-                }
-                return zahar;
-            }
-
-            static int ClatiteSimple(int ciocolata, int gem, int inghetata, int[] index)
-            {
-                int simple = 0;
-
-                if (ciocolata == 0 && gem == 0 && inghetata == 0)
-                {
-                    for (int i = 0; i < index.Length; i++)
-                    {
-                        if (index[i] % 2 == 1)
-                            simple++;
-                    }
-                }
-                return simple;
+                total += ciocolata + gem + inghetata + zahar + simple;
             }
         }
     }

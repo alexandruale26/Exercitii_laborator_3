@@ -22,15 +22,36 @@ namespace Ex1
             }
              else if (numar1 > numar2)
             {
-                max = numar1;
+                if (numar1 > numar3)
+                {
+                    max = numar1;
+                }
+                else
+                {
+                    max = numar3;
+                }
             }
             else if (numar2 > numar3)
             {
-                max = numar2;
+                if (numar2 > numar1)
+                {
+                    max = numar2;
+                }
+                else
+                {
+                    max = numar3;
+                }
             }
-            else
+            else if (numar3 > numar1)
             {
-                max = numar3;
+                if (numar3 > numar2)
+                {
+                    max = numar3;
+                }
+                else
+                {
+                    max = numar2;
+                }
             }
 
             Console.WriteLine("Maximul este --> " + max);
